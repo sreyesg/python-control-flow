@@ -138,5 +138,106 @@ def weather_advice():
         print("Wear Light clothing")
     
 # Call the function
-weather_advice()
+# weather_advice()
+
+# Exercise 5: What's the Season?
+#
+# Write a Python function named `determine_season` that figures out the season based on the entered date.
+#
+# Requirements:
+# - The function should first prompt the user to enter the month (as three characters): "Enter the month of the year (Jan - Dec):"
+# - Then, the function should prompt the user to enter the day of the month: "Enter the day of the month:"
+# - Determine the current season based on the date:
+#      - Dec 21 - Mar 19: Winter
+#      - Mar 20 - Jun 20: Spring
+#      - Jun 21 - Sep 21: Summer
+#      - Sep 22 - Dec 20: Fall
+# - Print the season for the entered date in the format: "<Mmm> <dd> is in <season>."
+#
+# Hints:
+# - Use 'in' to check if a string is in a list or tuple.
+# - Adjust the season based on the day of the month when needed.
+# - Ensure to validate input formats and handle unexpected inputs gracefully.
+
+
+from datetime import date, datetime, timedelta
+
+# store 3 letters months in variable and convert it to number. 
+# store day digits and join with month digits to get date string format .
+# check the date string against season function/database
+# display result
+
+user_month = input("Enter the month of the year (Jan - Dec):")
+user_day = input("Enter the day of the month: ")
+season = ''
+months_dic = {"JAN": 1, "FEB": 2, "MAR": 3, "APR": 4,
+          "MAY": 5, "JUN": 6, "JUL": 7, "AUG": 8,
+          "SEP": 9, "OCT": 10, "NOV": 11, "DEC": 12}
+
+
+month_number = months_dic[user_month.upper()]
+date_string = f'2024-{month_number}-{user_day}' 
+
+date_object = datetime.strptime(date_string, "%Y-%m-%d")
+
+# Seasons 
+winter_start_date = date(2024, 1, 1)
+winter_end_date = date(2024, 3, 19)
+spring_start_date = date(2024, 3, 20)
+spring_end_date = date(2024, 6, 20)
+summer_start_date = date(2024, 6, 21)
+summer_end_date = date(2024, 9, 21)
+fall_start_date = date(2024, 9, 22)
+fall_end_date = date(2024, 12, 20)
+trail_winter_start_date = date(2024, 12, 21)
+trail_winter_end_date = date(2024, 12, 31)
+
+
+winter = []
+winter_date = winter_start_date
+while winter_date <= winter_end_date:
+    winter.append(winter_date)
+    winter_date += timedelta(days=1)
+
+trail_winter = []
+trail_winter_date = trail_winter_start_date
+while trail_winter_date <= trail_winter_end_date:
+    trail_winter.append(trail_winter_date)
+    trail_winter_date += timedelta(days=1)
+
+spring = []
+spring_date = spring_start_date
+while spring_date <= spring_end_date:
+    spring.append(spring_date)
+    spring_date += timedelta(days=1)
+
+summer = []
+summer_date = summer_start_date
+while summer_date <= summer_end_date:
+    summer.append(summer_date)
+    summer_date += timedelta(days=1)
+
+fall = []
+fall_date = fall_start_date
+while fall_date <= fall_end_date:
+    fall.append(fall_date)
+    fall_date += timedelta(days=1)
+
+
+
+def determine_season():
+    if datetime.date(date_object) in winter:
+        season = "Winter"
+    if datetime.date(date_object) in trail_winter:
+        season = "Winter"
+    if datetime.date(date_object) in spring:
+        season = "Spring"
+    if datetime.date(date_object) in summer:
+        season = "Summer"
+    if datetime.date(date_object) in fall:
+        season = "Fall"
+
+    print(f'{date_string} is in {season}')
+# Call the function
+determine_season()
 
